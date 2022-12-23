@@ -16,8 +16,9 @@ return new class extends Migration
     {
         $procedure = "CREATE PROCEDURE readAllEmployee ()
                     BEGIN
-                        SELECT idEmployee, idRoles, idSalary, firstName, lastName, lastNameMother, phone, email
-                        FROM employees;
+                        SELECT e.idEmployee, r.rol, e.idSalary, e.firstName, e.lastName, e.lastNameMother, e.phone, e.email
+                        FROM employees e
+                        INNER JOIN roles r ON r.idRoles=e.idRoles;
                     END";
         DB::unprepared($procedure);
     }

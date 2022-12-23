@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Termwind\Components\Dd;
 
 class EmployeeController extends Controller
 {
@@ -14,7 +16,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        $employees = 0;
     }
 
     /**
@@ -35,7 +37,21 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /*$request->validate([
+            'employeeFirstName' => 'required|min:3',
+            'employeeLastName' => 'required|min:3',
+            'employeeLasttNameMother' => 'required|min:3',
+            'employeePhone' => 'required|min:10',
+            'employeeEmail' => 'required|min:15',
+            'employeeRol' => 'required'
+        ]);*/
+
+        $data = array($request->employeeFirstName, $request->employeeLastName, $request->employeeLasttNameMother,
+                        $request->employeePhone, $request->employeeEmail, $request->employeeRol);
+        Dd($data);
+        $insert = DB::select('CALL saveEmployee(?,?,?,?,?,?,?)', $data);
+
+        return redirect()->route('employees')->with('sucesss','Registro exitoso del empleado');
     }
 
     /**
