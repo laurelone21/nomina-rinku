@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employee;
+use App\Models\TempPays;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Termwind\Components\Dd;
 
-class EmployeeController extends Controller
+class TempPaysController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = DB::select('CALL readEmployeePays');
+        //
     }
 
     /**
@@ -37,26 +36,38 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
+        $request -> validate([
+            'payMonth' => 'required',
+            'payEmployee' => 'required',
+            'payDeliveries' => 'required'
+        ]);
+        //idTempPay, idMonth, idEmployee, numberDeliveries
+        $data = array($request->payMonth, $request->payEmployee, $request->payDeliveries);
+
+        $insert = DB::select('CALL saveTempPays(?,?,?)', $data);
+        return $tempEmployees = DB::select('CALL readTempPays(?)',array($request->payMonth));
+
+        //return redirect()->route('pays')->with('sucess','Registro exitoso');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Employee  $employee
+     * @param  \App\Models\TempPays  $tempPays
      * @return \Illuminate\Http\Response
      */
     public function show($idMonth)
     {
-        return $employees = DB::select('CALL readEmployeePays(?)',array($idMonth));
+        return $tempEmployees = DB::select('CALL readTempPays(?)',array($idMonth));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Employee  $employee
+     * @param  \App\Models\TempPays  $tempPays
      * @return \Illuminate\Http\Response
      */
-    public function edit(Employee $employee)
+    public function edit(TempPays $tempPays)
     {
         //
     }
@@ -65,10 +76,10 @@ class EmployeeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Employee  $employee
+     * @param  \App\Models\TempPays  $tempPays
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Employee $employee)
+    public function update(Request $request, TempPays $tempPays)
     {
         //
     }
@@ -76,10 +87,10 @@ class EmployeeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Employee  $employee
+     * @param  \App\Models\TempPays  $tempPays
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Employee $employee)
+    public function destroy(TempPays $tempPays)
     {
         //
     }

@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employee;
+use App\Models\Months;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Termwind\Components\Dd;
 
-class EmployeeController extends Controller
+class MonthsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,10 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = DB::select('CALL readEmployeePays');
+        $months = DB::select('CALL selectMonth');
+        /*$employees = DB::select('CALL readEmployeePays');
+        return view('pay.index', ['months' => $months, 'employees' => $employees]);*/
+        return view('pay.index', ['months' => $months]);
     }
 
     /**
@@ -37,26 +39,28 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Employee  $employee
+     * @param  \App\Models\Months  $months
      * @return \Illuminate\Http\Response
      */
-    public function show($idMonth)
+    public function show(Months $months)
     {
-        return $employees = DB::select('CALL readEmployeePays(?)',array($idMonth));
+        $months = DB::select('CALL selectMonth');
+        return view('pay.paysheet', ['months' => $months]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Employee  $employee
+     * @param  \App\Models\Months  $months
      * @return \Illuminate\Http\Response
      */
-    public function edit(Employee $employee)
+    public function edit(Months $months)
     {
         //
     }
@@ -65,10 +69,10 @@ class EmployeeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Employee  $employee
+     * @param  \App\Models\Months  $months
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Employee $employee)
+    public function update(Request $request, Months $months)
     {
         //
     }
@@ -76,10 +80,10 @@ class EmployeeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Employee  $employee
+     * @param  \App\Models\Months  $months
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Employee $employee)
+    public function destroy(Months $months)
     {
         //
     }
