@@ -14,7 +14,7 @@ return new class extends Migration
      */
     public function up()
     {
-        $procedure = "CREATE PROCEDURE paySheet (IN idEmployee smallint, IN idMonthh smallint, IN numberDeliveriess smallint)
+        $procedure = "CREATE PROCEDURE paySheet (IN idEmployeee smallint, IN idMonthh smallint, IN numberDeliveriess smallint)
         BEGIN
             INSERT INTO paysheets (idEmployee, idMonth, hoursWorked, numberDeliveries, salary, deliveries, bonus, vales, isr9, isr3, perceptions, deductions, total)
 

@@ -14,9 +14,9 @@ return new class extends Migration
      */
     public function up()
     {
-        $procedure = "CREATE PROCEDURE deleteEmployee(IN idEmployee smallint)
+        $procedure = "CREATE PROCEDURE deleteEmployee(IN idEmployeee smallint)
                     BEGIN
-                        DELETE FROM employees WHERE idEmployee=idEmployee;
+                        DELETE FROM employees WHERE idEmployee=idEmployeee;
                     END";
         DB::unprepared($procedure);
     }

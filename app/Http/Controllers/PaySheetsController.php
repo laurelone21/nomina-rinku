@@ -42,7 +42,7 @@ class PaySheetsController extends Controller
 
             // IN idEmployee smallint, IN idMonthh smallint, IN numberDeliveriess
             $result = DB::select('CALL paySheet(?,?,?)',$data);
-            var_dump($result);
+            //var_dump($result);
         }
         return redirect()->route('pays')->with('success','Calculo de nómina exitoso');
     }

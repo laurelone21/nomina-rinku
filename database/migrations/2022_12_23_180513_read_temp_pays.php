@@ -14,7 +14,7 @@ return new class extends Migration
      */
     public function up()
     {
-        $procedure = "CREATE PROCEDURE readTempPays (IN idMonth smallint)
+        $procedure = "CREATE PROCEDURE readTempPays (IN idMonthh smallint)
                     BEGIN
                         SELECT t.idTempPay, t.idMonth, e.idEmployee,
                             CONCAT(e.firstName,' ',e.lastName,' ',e.lastNameMother, ' - ', r.rol) employee,
@@ -22,7 +22,7 @@ return new class extends Migration
                         FROM tempPays t
                             INNER JOIN employees e ON e.idEmployee=t.idEmployee
                             INNER JOIN roles r ON r.idRoles=e.idRoles
-                        WHERE t.idMonth=idMonth;
+                        WHERE t.idMonth=idMonthh;
                     END";
         DB::unprepared($procedure);
     }

@@ -14,11 +14,11 @@ return new class extends Migration
      */
     public function up()
     {
-        $procedure = "CREATE PROCEDURE readEmployee(IN idEmployee smallint)
+        $procedure = "CREATE PROCEDURE readEmployee(IN idEmployeee smallint)
                     BEGIN
                         SELECT idEmployee, idRoles, idSalary, firstName, lastName, lastNameMother, phone, email
                         FROM employees
-                        WHERE idEmployee=idEmployee;
+                        WHERE idEmployee=idEmployeee;
                     END";
         DB::unprepared($procedure);
     }

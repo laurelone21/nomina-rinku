@@ -65,6 +65,7 @@ class EmployeesController extends Controller
         //Dd($idEmployee);
         $data = array($idEmployee);
         $employee = DB::select('CALL readEmployee(?)', $data );
+        //Dd($employee);
 
         return view('register.edit', ['employees' => $employee]);
     }
