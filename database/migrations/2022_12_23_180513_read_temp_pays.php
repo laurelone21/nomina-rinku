@@ -16,12 +16,12 @@ return new class extends Migration
     {
         $procedure = "CREATE PROCEDURE readTempPays (IN idMonthh smallint)
                     BEGIN
-                        SELECT t.idTempPay, t.idMonth, e.idEmployee,
-                            CONCAT(e.firstName,' ',e.lastName,' ',e.lastNameMother, ' - ', r.rol) employee,
-                            t.numberDeliveries
+                        SEELECT t.idTempPay, m.month, e.idEmployee, CONCAT(e.firstName,' ',e.lastName,' ',e.lastNameMother, ' - ', r.rol) employee,
+                                t.numberDeliveries
                         FROM tempPays t
-                            INNER JOIN employees e ON e.idEmployee=t.idEmployee
-                            INNER JOIN roles r ON r.idRoles=e.idRoles
+                        INNER JOIN employees e ON e.idEmployee=t.idEmployee
+                        INNER JOIN roles r ON r.idRoles=e.idRoles
+                        INNER JOIN months m ON m.idMonth=t.idMonth
                         WHERE t.idMonth=idMonthh;
                     END";
         DB::unprepared($procedure);
